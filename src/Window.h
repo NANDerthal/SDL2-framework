@@ -1,20 +1,25 @@
-#ifndef Window
-#define Window
+#ifndef WINDOW_H
+#define WINDOW_H
+
+#include <SDL2/SDL.h>
+#include <string>
 
 class Window {
-
+		
 private:
-	SDL_Window window;
+	SDL_Window* window;
 	int screenHeight;
 	int screenWidth;
 
 public:
-	
-	Window( int height = 480, int width = 640 )
-	
-	~Window()
+	Window( int height = 480, int width = 640 );
+	~Window();
 
-	void resizeWindow( int newWidth, int newHeight )
-	int getWidth()
-	int getHeight()
-}
+	bool init( std::string winTitle );
+	void resizeWindow( int newWidth, int newHeight );
+	int getWidth();
+	int getHeight();
+
+};
+
+#endif

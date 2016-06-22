@@ -1,8 +1,6 @@
 #include "Window.h"
-#include <SDL.h>
-#include <string>
 
-Window::Window( int height = 480, int width = 640 ) {
+Window::Window( int height, int width ) {
 	window = NULL;
 	screenHeight = height;
 	screenWidth = width;
@@ -17,13 +15,13 @@ bool Window::init( std::string winTitle ) {
 	if ( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
 		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
 		return false;
-	}
-	
-	window = SDL_CreateWindow( winTitle, SDL_WINDOWPOS_UNDEFINED, 
+	}	
+
+	window = SDL_CreateWindow( winTitle.c_str(), SDL_WINDOWPOS_UNDEFINED, 
 								SDL_WINDOWPOS_UNDEFINED, screenWidth, 
 								screenHeight, SDL_WINDOW_SHOWN );
 	
-	if ( gWINDOW == NULL ) {
+	if ( window == NULL ) {
 		printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
 		return false;
 	}
