@@ -55,7 +55,7 @@ bool Window::init( std::string winTitle ) {
 	}
 	
 	// Initialize renderer
-	renderer = SDL_CreateRenderer( renderer, -1, SDL_RENDERER_ACCELERATED )
+	renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
 	
 	// Initialization was successful
 	return true;
