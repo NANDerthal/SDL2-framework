@@ -2,11 +2,15 @@
 
 Window::Window( int height, int width ) {
 	window = nullptr;
+	renderer = nullptr;
 	screenHeight = height;
 	screenWidth = width;
 }
 
 Window::~Window() {
+	SDL_DestroyRenderer( renderer );
+	renderer = nullptr;
+	
 	SDL_DestroyWindow( window );
 	window = nullptr;
 	
@@ -30,6 +34,10 @@ int Window::getHeight() {
 	return screenHeight;
 }
 
+SDL_Renderer* Window::getRenderer() {
+	return renderer;
+}
+
 bool Window::init( std::string winTitle ) {
 	// Initialize SDL
 	if ( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
@@ -46,11 +54,14 @@ bool Window::init( std::string winTitle ) {
 		return false;
 	}
 	
+	// Initialize renderer
+	renderer = SDL_CreateRenderer( renderer, -1, SDL_RENDERER_ACCELERATED )
+	
 	// Initialization was successful
 	return true;
 }
 
-void Window::render( SDL_Renderer* renderer ) {
+void Window::render( ) {
 	SDL_RenderPresent( renderer );
 }
 
