@@ -14,12 +14,20 @@ private:
 public:
 	Window( int height = 480, int width = 640 );
 	~Window();
-
-	bool init( std::string winTitle );
-	void resizeWindow( int newWidth, int newHeight );
+	
+	// Read member variables
 	int getWidth();
 	int getHeight();
-
+	
+	// Set member variables and adjust window accordingly
+	void resizeWindow( int newWidth, int newHeight );
+	
+	// Initialize window and SDL
+	// Returns true if successful, false if failed
+	bool init( std::string winTitle );
+	
+	// Draw to window whatever was in renderer
+	void render( SDL_Renderer* renderer );
 };
 
 #endif
