@@ -1,29 +1,20 @@
 #include "Window.h"
 
 Window::Window( int height, int width ) {
-	window = nullptr;
-	renderer = nullptr;
+	window = NULL;
+	renderer = NULL;
 	screenHeight = height;
 	screenWidth = width;
 }
 
 Window::~Window() {
 	SDL_DestroyRenderer( renderer );
-	renderer = nullptr;
+	renderer = NULL;
 	
 	SDL_DestroyWindow( window );
-	window = nullptr;
+	window = NULL;
 	
 	SDL_Quit();
-}
-
-void Window::resizeWindow( int newWidth, int newHeight ) {
-	screenWidth = newWidth;
-	screenHeight = newHeight;
-	
-	if ( window != nullptr ) {
-		SDL_SetWindowSize( window, screenWidth, screenHeight );
-	}
 }
 
 int Window::getWidth() {
@@ -59,6 +50,15 @@ bool Window::init( std::string winTitle ) {
 	
 	// Initialization was successful
 	return true;
+}
+
+void Window::resizeWindow( int newWidth, int newHeight ) {
+	screenWidth = newWidth;
+	screenHeight = newHeight;
+	
+	if ( window != NULL ) {
+		SDL_SetWindowSize( window, screenWidth, screenHeight );
+	}
 }
 
 void Window::render( ) {

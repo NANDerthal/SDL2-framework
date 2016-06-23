@@ -14,9 +14,18 @@ private:
 public:
 	Sprite();
 	~Sprite();
-
+	
+	// Read member variables
+	int getWidth();
+	int getHeight();
+	
+	// Load texture and get dimensions
 	bool init( SDL_Renderer* renderer, std::string filename );
-	void draw( SDL_Renderer* renderer, SDL_Rect* location, SDL_Rect* frame );
+	
+	// draw frame of sprite at location in renderer
+	void draw( SDL_Renderer* renderer, SDL_Rect* frame, SDL_Rect* location );
+	
+	// clear texture
 	void freeTexture();
 
 };
