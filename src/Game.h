@@ -3,9 +3,12 @@
 
 #include <SDL2/SDL.h>
 
+#include "Window.h"
+
 class Game {
 
 private:
+	Window mainWindow;
 
 public:
 	Game();
