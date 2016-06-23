@@ -10,24 +10,26 @@ Sprite::~Sprite() {
 	freeTexture();
 }
 
-int Sprite::getWidth() {
+int Sprite::getWidth() const {
 	return width;
 }
 
-int Sprite::getHeight() {
+int Sprite::getHeight() const {
 	return height;
 }
 
 bool Sprite::init( SDL_Renderer* renderer, std::string filename ) {
 	freeTexture();
 	
+	// load image to surface
 	const char* path = filename.c_str();
 	SDL_Surface* surface = IMG_Load( path );
 	if ( surface == NULL ) {
 		printf( "Unable to create surface from %s! SDL Error: %s\n", path, SDL_GetError() );
 		return false;
 	}
-
+	
+	// create texture
 	texture = SDL_CreateTextureFromSurface( renderer, surface );
 	if ( texture == NULL ) {
 		printf( "Unable to create texture from %s! SDL Error: %s\n", path, SDL_GetError() );
@@ -38,11 +40,12 @@ bool Sprite::init( SDL_Renderer* renderer, std::string filename ) {
 	height = surface->h;
 
 	SDL_FreeSurface( surface );
-
+	
+	// Initialization was successful
 	return true;
 }
 
-void Sprite::draw( SDL_Renderer* renderer, SDL_Rect* frame, SDL_Rect* location ) {
+void Sprite::draw( SDL_Renderer* renderer, SDL_Rect* frame, SDL_Rect* location ) const {
 	SDL_RenderCopy( renderer, texture, frame, location );
 }
 
@@ -53,4 +56,5 @@ void Sprite::freeTexture() {
 		width = 0;
 		height = 0;
 	}
-}	
+}
+
