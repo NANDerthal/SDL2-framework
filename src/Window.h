@@ -21,12 +21,12 @@ public:
 	int getHeight();
 	SDL_Renderer* getRenderer();
 	
-	// Set member variables and adjust window accordingly
-	void resizeWindow( int newWidth, int newHeight );
-	
 	// Initialize SDL, window, and renderer
 	// Returns true if successful, false if failed
 	bool init( std::string winTitle );
+	
+	// Set member variables and adjust window accordingly
+	void resizeWindow( int newWidth, int newHeight );
 	
 	// Draw to window whatever was in renderer
 	void render( );
