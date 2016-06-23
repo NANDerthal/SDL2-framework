@@ -12,7 +12,7 @@ public:
 	~Game();
 	
 	// initialize SDL
-	void init();
+	bool init();
 
 };
 
