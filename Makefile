@@ -1,10 +1,10 @@
-OBJS = src/Window.cpp src/Window.h 
+OBJS = src/Window.cpp src/Window.h src/Sprite.cpp src/Sprite.h
 
 CC = g++ 
 
 COMPILER_FLAGS = -w -std=c++11 -O3
 
-LINKER_FLAGS = -lSDL2
+LINKER_FLAGS = -lSDL2 -lSDL_image
 
 OBJ_NAME = output
 
