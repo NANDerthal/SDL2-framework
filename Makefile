@@ -1,4 +1,4 @@
-OBJS = src/Window.cpp src/Window.h src/Sprite.cpp src/Sprite.h
+OBJS = src/Main.cpp src/Game.cpp src/Game.h src/Window.cpp src/Window.h src/Sprite.cpp src/Sprite.h
 
 CC = g++ 
 
