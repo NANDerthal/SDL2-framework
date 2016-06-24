@@ -44,7 +44,8 @@ public:
 	void init( SDL_Renderer* renderer, const AnimationData &data );
 	
 	// Get frame of animation animationID
-	void draw( SDL_Renderer* renderer, SDL_Rect* location, int animationID, int frame = -1 );
+	void draw( SDL_Renderer* renderer, SDL_Rect* renderLocation, 
+					SDL_Rect* frameLocation, int animationID, int frame = -1 );
 
 };
 

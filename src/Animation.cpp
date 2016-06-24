@@ -62,7 +62,8 @@ void Animation::init( SDL_Renderer* renderer, const AnimationData &data ) {
 }
 
 // Get frame of animation animationID
-void Animation::draw( SDL_Renderer* renderer, SDL_Rect* location, int animationID, int frame ) {
+void Animation::draw( SDL_Renderer* renderer, SDL_Rect* renderLocation,
+						SDL_Rect* frameLocation, int animationID, int frame ) {
 	// calculate which frame to get
 	if ( animationID != currAnimation ) {
 		currAnimation = animationID;
@@ -78,7 +79,11 @@ void Animation::draw( SDL_Renderer* renderer, SDL_Rect* location, int animationI
 			currFrame = 0;
 		}
 	}
-	
-	sprite.draw( renderer, &frames[ currAnimation ][ currFrame ], location );
-}
 
+	SDL_Rect outputFrame = *frameLocation;
+
+	outputFrame.x += frames[ currAnimation ][ currFrame ].x;
+	outputFrame.y += frames[ currAnimation ][ currFrame ].y;
+	
+	sprite.draw( renderer, &outputFrame, renderLocation );
+}
