@@ -68,9 +68,8 @@ int main( int argc, const char* argv[] ) {
 	// Test sprite
 	Sprite sprite;
 	sprite.init( renderer, guyDat.filename );
-
-	SDL_Rect spritePos = {0,0,32,64};
-	SDL_Rect spriteFrame = {0,0,32,64};
+	SDL_Rect spriteFrame = {0,0,guyDat.frameWidth(),guyDat.frameHeight()};
+	SDL_Rect spritePos = {0,355,guyDat.frameWidth(),guyDat.frameHeight()};
 	
 	// Test animation
 	enum Presses { UP, RIGHT, DOWN, LEFT };
@@ -93,7 +92,7 @@ int main( int argc, const char* argv[] ) {
 
 	bool quit = false;
 	SDL_Event e;
-	int delay = 100;
+	int delay = 1;
 
 	while ( !quit ) {
 		// Event handling
@@ -162,9 +161,9 @@ int main( int argc, const char* argv[] ) {
 			break;
 		}
 
-		hill.move( vel, 10 );
-		spritePos.x += 10*vel.x;
-		spritePos.y += 10*vel.y;
+		hill.move( vel, delay );
+		spritePos.x += delay*vel.x;
+		spritePos.y += delay*vel.y;
 		
 
 		// Drawing
