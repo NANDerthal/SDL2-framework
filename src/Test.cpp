@@ -67,10 +67,10 @@ int main( int argc, const char* argv[] ) {
 	
 	// Test sprite
 	Sprite sprite;
-	sprite.init( renderer, udlrDat.filename );
+	sprite.init( renderer, guyDat.filename );
 
-	SDL_Rect r = {0,0,32,64};
-	SDL_Rect f = {0,0,32,64};
+	SDL_Rect spritePos = {0,0,32,64};
+	SDL_Rect spriteFrame = {0,0,32,64};
 	
 	// Test animation
 	enum Presses { UP, RIGHT, DOWN, LEFT };
@@ -162,18 +162,19 @@ int main( int argc, const char* argv[] ) {
 		}
 
 		hill.move( vel, 10 );
+		spritePos.x += 10*vel.x;
+		spritePos.y += 10*vel.y;
+		
 
 		// Drawing
 
 		SDL_Delay( delay );
 
-		r.x++;
-
 		bg.draw( renderer );
 		hill.draw( renderer, 0 );
 
 
-		sprite.draw( renderer, &f, &r );
+		sprite.draw( renderer, &spriteFrame, &spritePos );
 		anim.draw( renderer, &loc, &src, animID, press  );
 		window.render();
 	}
