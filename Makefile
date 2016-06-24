@@ -1,4 +1,4 @@
-OBJS = src/Window.cpp src/Window.h src/Sprite.cpp src/Sprite.h src/Animation.cpp src/Animation.h
+OBJS = src/Window.cpp src/Window.h src/Sprite.cpp src/Sprite.h src/Animation.cpp src/Animation.h src/Background.cpp src/Background.h src/Parallax.cpp src/Parallax.h
 MAIN = src/Game.h src/Game.cpp src/Main.cpp
 TEST = src/Test.cpp
 
