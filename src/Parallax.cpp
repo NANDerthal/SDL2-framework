@@ -1,4 +1,4 @@
-#include <cmath>
+#include <math.h>
 #include "Parallax.h"
 
 Parallax::Parallax() {
@@ -15,8 +15,8 @@ void Parallax::setScrollSpeed( double newScrollSpeed ) {
 }
 
 void Parallax::move( const Velocity &velocity, int elapsedTime ) {
-	position.x += std::floor( velocity.x * scrollSpeed * elapsedTime );
-	position.y += std::floor( velocity.y * scrollSpeed * elapsedTime );
+	position.x += round( velocity.x * scrollSpeed * elapsedTime );
+	position.y += round( velocity.y * scrollSpeed * elapsedTime );
 }
 
 void Parallax::draw( SDL_Renderer* renderer, int animationID, int frame ) {
@@ -27,7 +27,7 @@ void Parallax::draw( SDL_Renderer* renderer, int animationID, int frame ) {
 
 	SDL_Rect* location = getRendererSize( renderer );
 
-	animation.draw( renderer, location, &position, animationID, frame );
+	animation.draw( renderer, &position, location, animationID, frame );
 
 	delete location;
 	location = nullptr;
