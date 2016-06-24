@@ -1,4 +1,6 @@
 #include "Animation.h"
+#include "Background.h"
+#include "Parallax.h"
 #include "Sprite.h"
 #include "Window.h"
 
@@ -26,6 +28,42 @@ int main( int argc, const char* argv[] ) {
 		100, // frameHeight
 		2 // numAnimations
 	};
+
+	AnimationData guyDat = {
+		"img/lilboy.png", // filename
+		{ 0 }, // delays
+		{ 1 }, // numframes
+		88, // frameWidth
+		125, // frameHeight
+		1 // numAnimations
+	};
+
+	AnimationData bgDat = {
+		"img/bg.png", // filename
+		{ 0 }, // delays
+		{ 1 }, // numframes
+		640, // frameWidth
+		480, // frameHeight
+		1 // numAnimations
+	};
+
+	AnimationData hdDat = {
+		"img/hotdog.png", // filename
+		{ 0 }, // delays
+		{ 1 }, // numframes
+		640, // frameWidth
+		480, // frameHeight
+		1 // numAnimations
+	};
+
+	AnimationData hillDat = {
+		"img/hill.png", // filename
+		{ 0 }, // delays
+		{ 1 }, // numframes
+		640, // frameWidth
+		269, // frameHeight
+		1 // numAnimations
+	};
 	
 	// Test sprite
 	Sprite sprite;
@@ -33,7 +71,6 @@ int main( int argc, const char* argv[] ) {
 
 	SDL_Rect r = {0,0,32,64};
 	SDL_Rect f = {0,0,32,64};
-	SDL_Rect bg = {0,0,640,480};
 	
 	// Test animation
 	enum Presses { UP, RIGHT, DOWN, LEFT };
@@ -41,12 +78,27 @@ int main( int argc, const char* argv[] ) {
 	SDL_Rect src = {0, 0, 100, 100};
 	Animation anim;
 	anim.init( renderer, udlrDat );
-	
+
+	// Test background
+	Background bg;
+	bg.init( renderer, bgDat );
+
+	// Test Parallax
+	Parallax hill;
+	hill.init( renderer, hillDat );
+	SDL_Rect pos = {0,211,640,269};
+	//SDL_Rect pos = {0,0,100,100};
+	hill.setPosition( &pos );
+	hill.setScrollSpeed( 0.42 );
+
 	bool quit = false;
 	SDL_Event e;
+	int delay = 100;
 
 	while ( !quit ) {
-		int press = 0;
+		// Event handling
+		
+		int press = -1;
 		int animID = 0;
 		
 		while ( SDL_PollEvent( &e ) != 0 ) {
@@ -85,12 +137,42 @@ int main( int argc, const char* argv[] ) {
 			}
 		}
 
-		SDL_Delay( 100 );
+
+		// Logic
+		Velocity vel = {0,0};
+		switch ( press ) {
+			case UP:
+			vel.y = 1;
+			break;
+
+			case DOWN:
+			vel.y = -1;
+			break;
+
+			case LEFT:
+			vel.x = -1;
+			break;
+
+			case RIGHT:
+			vel.x = 1;
+			break;
+
+			default:
+			break;
+		}
+
+		hill.move( vel, 10 );
+
+		// Drawing
+
+		SDL_Delay( delay );
 
 		r.x++;
-		
-		SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
-		SDL_RenderFillRect( renderer, &bg );	
+
+		bg.draw( renderer );
+		hill.draw( renderer, 0 );
+
+
 		sprite.draw( renderer, &f, &r );
 		anim.draw( renderer, &loc, &src, animID, press  );
 		window.render();
