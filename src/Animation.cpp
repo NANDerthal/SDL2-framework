@@ -51,6 +51,7 @@ void Animation::init( SDL_Renderer* renderer, const AnimationData &data ) {
 	
 	// calculate frame rectangle locations
 	for ( int i = 0; i < data.numAnimations ; ++i ) {
+		std::vector<SDL_Rect> animRow;
 		frames.push_back( animRow );
 		for ( int j = 0; j < data.numFrames[ i ] ; ++j ) {
 			SDL_Rect currFrame = { j*frameWidth, i*frameHeight,
