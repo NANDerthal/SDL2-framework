@@ -1,5 +1,5 @@
-#include <math.h>
 #include "Parallax.h"
+#include "utility.hpp"
 
 Parallax::Parallax() {
 	position = {0,0,0,0};
@@ -15,8 +15,8 @@ void Parallax::setScrollSpeed( double newScrollSpeed ) {
 }
 
 void Parallax::move( const Velocity &velocity, int elapsedTime ) {
-	position.x += round( velocity.x * scrollSpeed * elapsedTime );
-	position.y += round( velocity.y * scrollSpeed * elapsedTime );
+	position.x += utility::roundNotZero( velocity.x * scrollSpeed * elapsedTime );
+	position.y += utility::roundNotZero( velocity.y * scrollSpeed * elapsedTime );
 }
 
 void Parallax::draw( SDL_Renderer* renderer, int animationID, int frame ) {

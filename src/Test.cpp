@@ -173,7 +173,6 @@ int main( int argc, const char* argv[] ) {
 		bg.draw( renderer );
 		hill.draw( renderer, 0 );
 
-
 		sprite.draw( renderer, &spriteFrame, &spritePos );
 		anim.draw( renderer, &loc, &src, animID, press  );
 		window.render();
