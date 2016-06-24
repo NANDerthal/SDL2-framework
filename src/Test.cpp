@@ -38,6 +38,7 @@ int main( int argc, const char* argv[] ) {
 	// Test animation
 	enum Presses { UP, RIGHT, DOWN, LEFT };
 	SDL_Rect loc = {0,64,100,100};
+	SDL_Rect src = {0, 0, 100, 100};
 	Animation anim;
 	anim.init( renderer, udlrDat );
 	
@@ -91,7 +92,7 @@ int main( int argc, const char* argv[] ) {
 		SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
 		SDL_RenderFillRect( renderer, &bg );	
 		sprite.draw( renderer, &f, &r );
-		anim.draw( renderer, &loc, animID, press  );
+		anim.draw( renderer, &loc, &src, animID, press  );
 		window.render();
 	}
 
