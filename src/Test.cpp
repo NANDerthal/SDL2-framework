@@ -31,11 +31,11 @@ int main( int argc, const char* argv[] ) {
 
 	AnimationData guyDat = {
 		"img/lilboy.png", // filename
-		{ 0 }, // delays
-		{ 1 }, // numframes
+		{ 0, 4 }, // delays
+		{ 1, 4 }, // numframes
 		88, // frameWidth
 		125, // frameHeight
-		1 // numAnimations
+		2 // numAnimations
 	};
 
 	AnimationData bgDat = {
@@ -78,6 +78,13 @@ int main( int argc, const char* argv[] ) {
 	Animation anim;
 	anim.init( renderer, udlrDat );
 
+	Animation guy;
+	guy.init( renderer, guyDat);
+	SDL_Rect guyFrameRect = spriteFrame;
+	SDL_Rect guyPos = spritePos;
+	int guyFrame = 0;
+	int guyCount = 0;
+	
 	// Test background
 	Background bg;
 	bg.init( renderer, bgDat );
@@ -99,6 +106,7 @@ int main( int argc, const char* argv[] ) {
 		
 		int press = -1;
 		int animID = 0;
+		int guyID = 0;
 		
 		while ( SDL_PollEvent( &e ) != 0 ) {
 			if ( e.type == SDL_QUIT ) {
@@ -110,26 +118,31 @@ int main( int argc, const char* argv[] ) {
 					case SDLK_UP:
 					press = UP;
 					animID = 1;
+					guyID = 1;
 					break;
 					
 					case SDLK_DOWN:
 					press = DOWN;
 					animID = 1;
+					guyID = 1;
 					break;
 					
 					case SDLK_LEFT:
 					press = LEFT;
 					animID = 1;
+					guyID = 1;
 					break;
 					
 					case SDLK_RIGHT:
 					press = RIGHT;
 					animID = 1;
+					guyID = 1;
 					break;
 					
 					default:
 					press = 0;
 					animID = 0;
+					guyID = 0;
 					break;
 					
 				}
@@ -138,6 +151,7 @@ int main( int argc, const char* argv[] ) {
 
 
 		// Logic
+		
 		Velocity vel = {0,0};
 		switch ( press ) {
 			// note that the origin is in the top left!
@@ -165,6 +179,22 @@ int main( int argc, const char* argv[] ) {
 		spritePos.x += delay*vel.x;
 		spritePos.y += delay*vel.y;
 		
+		switch ( guyID ) {
+			case 1:
+			if ( ++guyCount > guyDat.delays[1] ) {
+				guyCount = 0;
+				if ( ++guyFrame > guyDat.numFrames[1] ) {
+					guyFrame = 0;
+				}
+			}
+			break;
+			
+			default:
+			guyFrame = 0;
+			guyCount = 0;
+			break;
+		}
+		
 
 		// Drawing
 
@@ -173,8 +203,9 @@ int main( int argc, const char* argv[] ) {
 		bg.draw( renderer );
 		hill.draw( renderer, 0 );
 
-		sprite.draw( renderer, &spriteFrame, &spritePos );
+		//sprite.draw( renderer, &spriteFrame, &spritePos );
 		anim.draw( renderer, &loc, &src, animID, press  );
+		guy.draw( renderer, &guyPos, &guyFrameRect, guyID, guyFrame );
 		window.render();
 	}
 
