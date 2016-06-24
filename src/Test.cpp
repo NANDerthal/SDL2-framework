@@ -141,12 +141,13 @@ int main( int argc, const char* argv[] ) {
 		// Logic
 		Velocity vel = {0,0};
 		switch ( press ) {
+			// note that the origin is in the top left!
 			case UP:
-			vel.y = 1;
+			vel.y = -1;
 			break;
 
 			case DOWN:
-			vel.y = -1;
+			vel.y = 1;
 			break;
 
 			case LEFT:
