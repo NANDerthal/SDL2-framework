@@ -31,8 +31,6 @@ public:
 	Animation();
 	
 	// Read member variables
-	int getWidth() const;
-	int getHeight() const;
 	int getDelay() const; // Delay is in ms
 	int getNumFrames() const;
 	int getFrameWidth() const;

@@ -9,14 +9,6 @@ Animation::Animation() {
 
 // Read member variables
 
-int Animation::getWidth() const {
-	return sprite.getWidth();
-}
-
-int Animation::getHeight() const {
-	return sprite.getHeight();
-}
-
 int Animation::getDelay() const {
 	return delays[ currAnimation ];
 }
