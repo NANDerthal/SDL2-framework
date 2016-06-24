@@ -68,8 +68,8 @@ int main( int argc, const char* argv[] ) {
 	// Test sprite
 	Sprite sprite;
 	sprite.init( renderer, guyDat.filename );
-	SDL_Rect spriteFrame = {0,0,guyDat.frameWidth(),guyDat.frameHeight()};
-	SDL_Rect spritePos = {0,355,guyDat.frameWidth(),guyDat.frameHeight()};
+	SDL_Rect spriteFrame = {0,0,guyDat.frameWidth,guyDat.frameHeight};
+	SDL_Rect spritePos = {0,355,guyDat.frameWidth,guyDat.frameHeight};
 	
 	// Test animation
 	enum Presses { UP, RIGHT, DOWN, LEFT };
