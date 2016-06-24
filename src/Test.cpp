@@ -176,8 +176,8 @@ int main( int argc, const char* argv[] ) {
 		}
 
 		hill.move( vel, delay );
-		spritePos.x += delay*vel.x;
-		spritePos.y += delay*vel.y;
+		guyPos.x += delay*vel.x;
+		guyPos.y += delay*vel.y;
 		
 		switch ( guyID ) {
 			case 1:
