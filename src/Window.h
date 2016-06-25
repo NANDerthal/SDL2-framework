@@ -3,7 +3,8 @@
 
 #include <string>
 
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h> // ubuntu
+#include <SDL.h> // windows
 
 class Window {
 		

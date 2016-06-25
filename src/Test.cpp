@@ -1,4 +1,5 @@
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h> // ubuntu
+#include <SDL.h> // windows
 
 #include "Animation.h"
 #include "Background.h"
@@ -10,6 +11,15 @@
 /* Sandbox testing environment
  *  
  */
+ 
+ /*
+ * If 'main' is defined we clear that definition
+ * to get our default 'main' function back.
+ * This is necessary for Windows with mingw.
+ */
+#ifdef main
+# undef main
+#endif /* main */
 
 int main( int argc, const char* argv[] ) {
 	// Init sdl without error handling 

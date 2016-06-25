@@ -1,7 +1,8 @@
 #ifndef PARALLAX_H
 #define PARALLAX_H
 
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h> // ubuntu
+#include <SDL.h> // windows
 
 #include "Background.h"
 #include "Physics.h"
