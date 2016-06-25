@@ -4,7 +4,13 @@
 #include <math.h>
 
 namespace utility {
+
+	struct Position {
+		double x,y;
+	};
+
 	int roundNotZero( double num );
+
 }
 
 #endif
