@@ -18,8 +18,8 @@ void Parallax::setScrollSpeed( double newScrollSpeed ) {
 }
 
 void Parallax::move( const Velocity &velocity, int elapsedTime ) {
-	actualPosition.x += velocity.x * scrollSpeed * elapsedTime;
-	actualPosition.y += velocity.y * scrollSpeed * elapsedTime;
+	actualPosition.x -= velocity.x * scrollSpeed * elapsedTime;
+	actualPosition.y -= velocity.y * scrollSpeed * elapsedTime;
 	position.x = utility::roundNotZero( actualPosition.x );
 	position.y = utility::roundNotZero( actualPosition.y );
 }
