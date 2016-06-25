@@ -1,7 +1,10 @@
+#include <SDL2/SDL.h>
+
 #include "Animation.h"
 #include "Background.h"
 #include "Parallax.h"
 #include "Sprite.h"
+#include "utility.hpp"
 #include "Window.h"
 
 /* Sandbox testing environment
@@ -30,16 +33,16 @@ int main( int argc, const char* argv[] ) {
 	};
 
 	AnimationData guyDat = {
-		"img/lilboy.png", // filename
+		"../testbox/img/bro.png", // filename
 		{ 0, 4 }, // delays
 		{ 1, 4 }, // numframes
-		88, // frameWidth
-		125, // frameHeight
+		50, // frameWidth
+		80, // frameHeight
 		2 // numAnimations
 	};
 
 	AnimationData bgDat = {
-		"img/bg.png", // filename
+		"../testbox/img/bg.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
 		640, // frameWidth
@@ -48,7 +51,7 @@ int main( int argc, const char* argv[] ) {
 	};
 
 	AnimationData hdDat = {
-		"img/hotdog.png", // filename
+		"../testbox/img/hotdog.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
 		640, // frameWidth
@@ -57,7 +60,7 @@ int main( int argc, const char* argv[] ) {
 	};
 
 	AnimationData hillDat = {
-		"img/hill.png", // filename
+		"../testbox/img/hill.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
 		640, // frameWidth
@@ -73,8 +76,8 @@ int main( int argc, const char* argv[] ) {
 	
 	// Test animation
 	enum Presses { UP, RIGHT, DOWN, LEFT };
-	SDL_Rect loc = {0,64,100,100};
-	SDL_Rect src = {0, 0, 100, 100};
+	SDL_Rect loc = { 0, 0, 100, 100 };
+	SDL_Rect src = { 0, 0, 100, 100 };
 	Animation anim;
 	anim.init( renderer, udlrDat );
 
@@ -82,8 +85,7 @@ int main( int argc, const char* argv[] ) {
 	guy.init( renderer, guyDat);
 	SDL_Rect guyFrameRect = spriteFrame;
 	SDL_Rect guyPos = spritePos;
-	int guyFrame = 0;
-	int guyCount = 0;
+	utility::Position guyPosActual = { guyPos.x, guyPos.y };
 	
 	// Test background
 	Background bg;
@@ -99,7 +101,8 @@ int main( int argc, const char* argv[] ) {
 
 	bool quit = false;
 	SDL_Event e;
-	int delay = 1;
+	int moveDelay = 1;
+	int drawDelay = 50;
 
 	while ( !quit ) {
 		// Event handling
@@ -148,7 +151,27 @@ int main( int argc, const char* argv[] ) {
 				}
 			}
 		}
-
+		
+		const Uint8* keystate = SDL_GetKeyboardState( NULL );
+		
+		//continuous-response keys
+		if ( keystate[SDL_SCANCODE_UP] ) {
+			press = UP;
+			animID = 1;
+			guyID = 1;
+		} else if ( keystate[SDL_SCANCODE_DOWN] ) {
+			press = DOWN;
+			animID = 1;
+			guyID = 1;
+		} else if ( keystate[SDL_SCANCODE_LEFT] ) {
+			press = LEFT;
+			animID = 1;
+			guyID = 1;
+		} else if ( keystate[SDL_SCANCODE_RIGHT] ) {
+			press = RIGHT;
+			animID = 1;
+			guyID = 1;
+		}
 
 		// Logic
 		
@@ -166,46 +189,33 @@ int main( int argc, const char* argv[] ) {
 			case LEFT:
 			vel.x = -1;
 			break;
-
+			
 			case RIGHT:
 			vel.x = 1;
 			break;
-
-			default:
-			break;
-		}
-
-		hill.move( vel, delay );
-		guyPos.x += delay*vel.x;
-		guyPos.y += delay*vel.y;
-		
-		switch ( guyID ) {
-			case 1:
-			if ( ++guyCount > guyDat.delays[1] ) {
-				guyCount = 0;
-				if ( ++guyFrame > guyDat.numFrames[1] ) {
-					guyFrame = 0;
-				}
-			}
-			break;
 			
 			default:
-			guyFrame = 0;
-			guyCount = 0;
 			break;
 		}
-		
 
+		hill.move( vel, moveDelay );
+		guyPosActual.x += moveDelay*vel.x;
+		guyPosActual.y += moveDelay*vel.y;
+		guyPos.x = utility::roundNotZero( guyPosActual.x );
+		guyPos.y = utility::roundNotZero( guyPosActual.y );
+		
 		// Drawing
 
-		SDL_Delay( delay );
+		SDL_Delay( drawDelay );
+
+		SDL_RenderClear( renderer );
 
 		bg.draw( renderer );
 		hill.draw( renderer, 0 );
-
 		//sprite.draw( renderer, &spriteFrame, &spritePos );
 		anim.draw( renderer, &loc, &src, animID, press  );
-		guy.draw( renderer, &guyPos, &guyFrameRect, guyID, guyFrame );
+		guy.draw( renderer, &guyPos, &guyFrameRect, guyID );
+		
 		window.render();
 	}
 
