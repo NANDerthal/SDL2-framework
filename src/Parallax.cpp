@@ -2,12 +2,15 @@
 #include "utility.hpp"
 
 Parallax::Parallax() {
-	position = {0,0,0,0};
 	scrollSpeed = 0;
+	position = {0,0,0,0};
+	actualPosition = {0,0};
 }
 
 void Parallax::setPosition( SDL_Rect* newPosition ) {
 	position = *newPosition;
+	actualPosition.x = position.x;
+	actualPosition.y = position.y;
 }
 
 void Parallax::setScrollSpeed( double newScrollSpeed ) {
@@ -15,8 +18,10 @@ void Parallax::setScrollSpeed( double newScrollSpeed ) {
 }
 
 void Parallax::move( const Velocity &velocity, int elapsedTime ) {
-	position.x += utility::roundNotZero( velocity.x * scrollSpeed * elapsedTime );
-	position.y += utility::roundNotZero( velocity.y * scrollSpeed * elapsedTime );
+	actualPosition.x += velocity.x * scrollSpeed * elapsedTime;
+	actualPosition.y += velocity.y * scrollSpeed * elapsedTime;
+	position.x = utility::roundNotZero( actualPosition.x );
+	position.y = utility::roundNotZero( actualPosition.y );
 }
 
 void Parallax::draw( SDL_Renderer* renderer, int animationID, int frame ) {

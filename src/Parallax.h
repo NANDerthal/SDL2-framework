@@ -5,12 +5,14 @@
 
 #include "Background.h"
 #include "Physics.h"
+#include "utility.hpp"
 
 class Parallax: public Background {
 
 private:
 	double scrollSpeed; // fraction of camera scroll speed
 	SDL_Rect position;
+	utility::Position actualPosition;
 
 public:
 	Parallax();
