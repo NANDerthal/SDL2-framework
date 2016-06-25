@@ -3,8 +3,8 @@
 
 struct Velocity {
 	// pixels per second (pixel/1000 ms)
-	int x;
-	int y;
+	double x;
+	double y;
 };
 
 class Physics {
