@@ -38,7 +38,7 @@ void Animation::init( SDL_Renderer* renderer, const AnimationData &data ) {
 	sprite.init( renderer, data.filename );
 	delays = data.delays;
 	numFrames = data.numFrames;
-	frameWidth = data.frameWidth;
+	frameWidth = data.frameWidth; // TODO: sanity check these against sprite data
 	frameHeight = data.frameHeight;
 	
 	// calculate frame rectangle locations

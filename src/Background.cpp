@@ -5,7 +5,8 @@ Background::Background() {
 }
 
 void Background::init( SDL_Renderer* renderer, const AnimationData &data ) {
-	animation.init( renderer, data );	
+	animation.init( renderer, data );
+	// TODO: sanity check animation dimensions against window
 	initialized = true;
 }
 
