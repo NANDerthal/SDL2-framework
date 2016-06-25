@@ -46,7 +46,10 @@ bool Sprite::init( SDL_Renderer* renderer, std::string filename ) {
 }
 
 void Sprite::draw( SDL_Renderer* renderer, SDL_Rect* frame, SDL_Rect* location ) const {
-	SDL_RenderCopy( renderer, texture, frame, location );
+	int err = SDL_RenderCopy( renderer, texture, frame, location );
+	if ( err ) {
+		printf("Error rendering sprite! SDL Error: %s\n", SDL_GetError() );
+	}
 }
 
 void Sprite::freeTexture() {
