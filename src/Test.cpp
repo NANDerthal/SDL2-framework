@@ -50,21 +50,21 @@ int main( int argc, const char* argv[] ) {
 		1 // numAnimations
 	};
 
-	AnimationData hdDat = {
-		"../testbox/img/hotdog.png", // filename
+	AnimationData hillDat = {
+		"../testbox/img/hill.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
 		640, // frameWidth
 		480, // frameHeight
 		1 // numAnimations
 	};
-
-	AnimationData hillDat = {
-		"../testbox/img/hill.png", // filename
+	
+	AnimationData grassDat = {
+		"../testbox/img/grass.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
-		640, // frameWidth
-		269, // frameHeight
+		1280, // frameWidth
+		480, // frameHeight
 		1 // numAnimations
 	};
 	
@@ -94,15 +94,20 @@ int main( int argc, const char* argv[] ) {
 	// Test Parallax
 	Parallax hill;
 	hill.init( renderer, hillDat );
-	SDL_Rect pos = {0,211,640,269};
-	//SDL_Rect pos = {0,0,100,100};
+	SDL_Rect pos = {0,0,640,480};
 	hill.setPosition( &pos );
 	hill.setScrollSpeed( 0.42 );
+	
+	Parallax grass;
+	grass.init( renderer, grassDat );
+	SDL_Rect grassPos = {0,0,640,480};
+	grass.setPosition( &grassPos );
+	grass.setScrollSpeed( 1.0 );
 
 	bool quit = false;
 	SDL_Event e;
 	int moveDelay = 1;
-	int drawDelay = 50;
+	int drawDelay = 20;
 
 	while ( !quit ) {
 		// Event handling
@@ -199,6 +204,7 @@ int main( int argc, const char* argv[] ) {
 		}
 
 		hill.move( vel, moveDelay );
+		grass.move( vel, moveDelay );
 		guyPosActual.x += moveDelay*vel.x;
 		guyPosActual.y += moveDelay*vel.y;
 		guyPos.x = utility::roundNotZero( guyPosActual.x );
@@ -212,6 +218,7 @@ int main( int argc, const char* argv[] ) {
 
 		bg.draw( renderer );
 		hill.draw( renderer, 0 );
+		grass.draw( renderer, 0 );
 		//sprite.draw( renderer, &spriteFrame, &spritePos );
 		anim.draw( renderer, &loc, &src, animID, press  );
 		guy.draw( renderer, &guyPos, &guyFrameRect, guyID );
