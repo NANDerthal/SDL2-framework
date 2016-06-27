@@ -3,7 +3,11 @@
 
 #include <string>
 
-#include <SDL2/SDL.h>
+#ifdef USING_WINDOWS
+	#include <SDL.h>
+#else
+	#include <SDL2/SDL.h>
+#endif
 
 #include "SaveFile.h"
 #include "Window.h"

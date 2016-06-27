@@ -3,9 +3,13 @@
 
 #include <string>
 
-//#include <SDL2/SDL.h> // ubuntu
-#include <SDL.h> // windows
-#include <SDL_image.h>
+#ifdef USING_WINDOWS
+	#include <SDL.h>
+	#include <SDL_image.h>
+#else
+	#include <SDL2/SDL.h>
+	#include <SDL/SDL_image.h>
+#endif
 
 class Sprite {
 

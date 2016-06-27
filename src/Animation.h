@@ -4,8 +4,11 @@
 #include <vector>
 #include <string>
 
-//#include <SDL2/SDL.h> // ubuntu
-#include <SDL.h> // windows
+#ifdef USING_WINDOWS
+	#include <SDL.h>
+#else
+	#include <SDL2/SDL.h>
+#endif
 
 #include "Sprite.h"
 

@@ -26,7 +26,7 @@ test : $(OBJS) $(TEST)
 # ========== WINDOWS WITH MINGW ==========
 INCLUDE_PATHS_W = -IC:\mingw_dev_lib\cross-tools\x86_64-w64-mingw32\include\SDL2 
 LIBRARY_PATHS_W = -LC:\mingw_dev_lib\cross-tools\x86_64-w64-mingw32\lib
-COMPILER_FLAGS_W = -w -std=c++11 -O3 -Wl,-subsystem,windows
+COMPILER_FLAGS_W = -w -std=c++11 -O3 -Wl,-subsystem,windows -DUSING_WINDOWS
 LINKER_FLAGS_W = -lSDL2main
 
 allw: gamew testw

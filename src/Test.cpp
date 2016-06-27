@@ -1,5 +1,8 @@
-//#include <SDL2/SDL.h> // ubuntu
-#include <SDL.h> // windows
+#ifdef USING_WINDOWS
+	#include <SDL.h>
+#else
+	#include <SDL2/SDL.h>
+#endif
 
 #include "Animation.h"
 #include "Background.h"
