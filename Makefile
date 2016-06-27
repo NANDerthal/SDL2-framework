@@ -1,4 +1,4 @@
-OBJS = src/Window.cpp src/Window.h src/Sprite.cpp src/Sprite.h src/Animation.cpp src/Animation.h src/Background.cpp src/Background.h src/Parallax.cpp src/Parallax.h src/utility.cpp src/utility.hpp
+OBJS = src/Window.cpp src/Window.h src/Sprite.cpp src/Sprite.h src/Animation.cpp src/Animation.h src/Background.cpp src/Background.h src/Parallax.cpp src/Parallax.h src/utility.cpp src/utility.hpp src/Input.cpp src/Input.h
 MAIN = src/Game.h src/Game.cpp src/Main.cpp
 TEST = src/Test.cpp
 
@@ -6,7 +6,7 @@ CC = g++
 
 COMPILER_FLAGS = -w -std=c++11 -O3
 
-LINKER_FLAGS = -lSDL2 -lSDL2_image
+LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
 ALL_NAME = output
 
