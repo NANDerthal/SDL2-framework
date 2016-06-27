@@ -4,6 +4,7 @@ Game::Game() {
 }
 
 Game::~Game() {
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -33,6 +34,12 @@ bool Game::init() {
 	int imgFlags = IMG_INIT_PNG;
 	if ( !( IMG_Init( imgFlags ) & imgFlags ) ) {
 		printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+		return false;
+	}
+
+	// Initialize SDL_TTF 
+	if ( TTF_Init() < 0 ) {
+		printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
 		return false;
 	}
 	
