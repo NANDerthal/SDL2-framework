@@ -15,8 +15,8 @@ public:
 	Background();
 	~Background();
 	
-	void init( SDL_Renderer* renderer, const AnimationData &data );
-	void draw( SDL_Renderer* renderer );
+	virtual void init( SDL_Renderer* renderer, const AnimationData &data );
+	virtual void draw( SDL_Renderer* renderer );
 };
 
 #endif
