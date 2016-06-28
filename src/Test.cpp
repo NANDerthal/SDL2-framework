@@ -190,7 +190,8 @@ int main( int argc, const char* argv[] ) {
 			animID = 1;
 			guyID = 1;
 		}
-
+		
+		
 		// Logic
 		
 		Velocity vel = {0,0};
@@ -238,6 +239,15 @@ int main( int argc, const char* argv[] ) {
 		
 		window.render();
 	}
+
+	sprite.~Sprite();
+	anim.~Animation();
+	guy.~Animation();
+	bg.~Background();
+	hill.~Parallax();
+	grass.~Parallax();
+	
+	window.~Window();
 
 	IMG_Quit();
 	SDL_Quit();
