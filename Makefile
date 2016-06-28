@@ -4,7 +4,9 @@ TEST = src/Test.cpp
 
 CC = g++ 
 
-COMPILER_FLAGS = -w -std=c++11 -O3
+COMPILER_FLAGS = -w -std=c++11
+RELEASE_FLAGS = -O3
+DEBUG_FLAGS = --debug
 
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
@@ -19,9 +21,13 @@ OBJ_NAMES = $(ALL_NAME) $(TEST_NAME)
 all : game test
 
 game: $(OBJS) $(MAIN)
-	$(CC) $(OBJS) $(MAIN) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(ALL_NAME)
-test : $(OBJS) $(TEST)
-	$(CC) $(OBJS) $(TEST) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(TEST_NAME)
+	$(CC) $(OBJS) $(MAIN) $(COMPILER_FLAGS) $(RELEASE_FLAGS) $(LINKER_FLAGS) -o $(ALL_NAME)
+test: $(OBJS) $(TEST)
+	$(CC) $(OBJS) $(TEST) $(COMPILER_FLAGS) $(RELEASE_FLAGS) $(LINKER_FLAGS) -o $(TEST_NAME)
+test-debug: $(OBJS) $(TEST)
+	$(CC) $(OBJS) $(TEST) $(COMPILER_FLAGS) $(DEBUG_FLAGS) $(LINKER_FLAGS) -o $(TEST_NAME)
+debug-leak:
+	valgrind --leak-check=full --track-origins=yes --leak-resolution=high --show-reachable=yes ./$(TEST_NAME)
 
 # ========== WINDOWS WITH MINGW ==========
 INCLUDE_PATHS_W = -IC:\mingw_dev_lib\cross-tools\x86_64-w64-mingw32\include\SDL2 
