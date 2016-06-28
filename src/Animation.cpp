@@ -7,6 +7,10 @@ Animation::Animation() {
 	currFrame = 0;
 }
 
+Animation::~Animation() {
+	sprite.~Sprite();
+}
+
 // Read member variables
 
 int Animation::getDelay() const {

@@ -20,6 +20,7 @@ private:
 
 public:
 	Parallax();
+	
 	void setPosition( SDL_Rect* newPoisiton );
 	void setScrollSpeed( double newScrollSpeed );
 	void move( const Velocity &velocity, int elapsedTime );

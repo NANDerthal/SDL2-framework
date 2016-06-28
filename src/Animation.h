@@ -33,6 +33,7 @@ private:
 
 public:
 	Animation();
+	~Animation();
 	
 	// Read member variables
 	int getDelay() const; // Delay is in ms

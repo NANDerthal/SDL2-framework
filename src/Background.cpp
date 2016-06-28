@@ -4,6 +4,10 @@ Background::Background() {
 	initialized = false;
 }
 
+Background::~Background() {
+	animation.~Animation();
+}
+
 void Background::init( SDL_Renderer* renderer, const AnimationData &data ) {
 	animation.init( renderer, data );
 	// TODO: sanity check animation dimensions against window
