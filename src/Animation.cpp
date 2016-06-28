@@ -5,10 +5,12 @@ Animation::Animation() {
 	frameHeight = 0;
 	currAnimation = 0;
 	currFrame = 0;
+	sprite = new Sprite;
 }
 
 Animation::~Animation() {
-	sprite.~Sprite();
+	delete sprite;
+	sprite = nullptr;
 }
 
 // Read member variables
@@ -39,7 +41,7 @@ int Animation::getCurrframe() const {
 
 // Load sprite and fill member variables
 void Animation::init( SDL_Renderer* renderer, const AnimationData &data ) {
-	sprite.init( renderer, data.filename );
+	sprite->init( renderer, data.filename );
 	delays = data.delays;
 	numFrames = data.numFrames;
 	frameWidth = data.frameWidth; // TODO: sanity check these against sprite data
@@ -81,5 +83,5 @@ void Animation::draw( SDL_Renderer* renderer, SDL_Rect* renderLocation,
 	outputFrame.x += frames[ currAnimation ][ currFrame ].x;
 	outputFrame.y += frames[ currAnimation ][ currFrame ].y;
 	
-	sprite.draw( renderer, &outputFrame, renderLocation );
+	sprite->draw( renderer, &outputFrame, renderLocation );
 }

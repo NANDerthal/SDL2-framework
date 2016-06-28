@@ -24,7 +24,7 @@ struct AnimationData {
 class Animation {
 
 private:
-	Sprite sprite;
+	Sprite* sprite;
 	std::vector< std::vector <SDL_Rect> > frames;
 	std::vector< int > delays;
 	std::vector< int > numFrames;

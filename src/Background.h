@@ -6,7 +6,7 @@
 class Background {
 
 protected:
-	Animation animation;
+	Animation* animation;
 	bool initialized;
 
 	SDL_Rect* getRendererSize( SDL_Renderer* renderer );

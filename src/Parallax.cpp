@@ -34,15 +34,15 @@ void Parallax::draw( SDL_Renderer* renderer, int animationID, int frame ) {
 	SDL_Rect spritePosition = position;
 	
 	// check if we are outside the sprite boundaries
-	int posEdgeX = ( spritePosition.x + spritePosition.w ) - animation.getFrameWidth();
-	int posEdgeY = ( spritePosition.y + spritePosition.h ) - animation.getFrameHeight();
+	int posEdgeX = ( spritePosition.x + spritePosition.w ) - animation->getFrameWidth();
+	int posEdgeY = ( spritePosition.y + spritePosition.h ) - animation->getFrameHeight();
 	
 	if ( spritePosition.x < 0 ) {
 		renderLocation->x -= spritePosition.x;
 		spritePosition.x = 0;
 	} else if ( posEdgeX > 0 ) {
 		renderLocation->x -= posEdgeX;
-		spritePosition.x = animation.getFrameWidth() - spritePosition.w;
+		spritePosition.x = animation->getFrameWidth() - spritePosition.w;
 	}
 	
 	if ( spritePosition.y < 0 ) {
@@ -50,10 +50,10 @@ void Parallax::draw( SDL_Renderer* renderer, int animationID, int frame ) {
 		spritePosition.y = 0;
 	} else if ( posEdgeY > 0 ) {
 		renderLocation->y -= posEdgeY;
-		spritePosition.y = animation.getFrameHeight() - spritePosition.h;
+		spritePosition.y = animation->getFrameHeight() - spritePosition.h;
 	}
 
-	animation.draw( renderer, renderLocation, &spritePosition, animationID, frame );
+	animation->draw( renderer, renderLocation, &spritePosition, animationID, frame );
 
 	delete renderLocation;
 	renderLocation = nullptr;

@@ -2,14 +2,16 @@
 
 Background::Background() {
 	initialized = false;
+	animation = new Animation;
 }
 
 Background::~Background() {
-	animation.~Animation();
+	delete animation;
+	animation = nullptr;
 }
 
 void Background::init( SDL_Renderer* renderer, const AnimationData &data ) {
-	animation.init( renderer, data );
+	animation->init( renderer, data );
 	// TODO: sanity check animation dimensions against window
 	initialized = true;
 }
@@ -38,7 +40,7 @@ void Background::draw( SDL_Renderer* renderer ) {
 	
 	SDL_Rect* location = getRendererSize( renderer );
 
-	animation.draw( renderer, location, location, 0 );
+	animation->draw( renderer, location, location, 0 );
 
 	delete location;
 	location = nullptr;

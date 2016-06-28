@@ -30,10 +30,10 @@ int main( int argc, const char* argv[] ) {
 	IMG_Init( IMG_INIT_PNG );
 
 	// Test window
-	Window window;
-	window.init( "Fringe - Test" ); 
+	Window* window = new Window;
+	window->init( "Fringe - Test" ); 
 
-	SDL_Renderer* renderer = window.getRenderer();
+	SDL_Renderer* renderer = window->getRenderer();
 	
 	// Grab spritesheet
 	AnimationData udlrDat = {
@@ -82,8 +82,8 @@ int main( int argc, const char* argv[] ) {
 	};
 	
 	// Test sprite
-	Sprite sprite;
-	sprite.init( renderer, guyDat.filename );
+	Sprite* sprite = new Sprite;
+	sprite->init( renderer, guyDat.filename );
 	SDL_Rect spriteFrame = {0,0,guyDat.frameWidth,guyDat.frameHeight};
 	SDL_Rect spritePos = {0,355,guyDat.frameWidth,guyDat.frameHeight};
 	
@@ -91,31 +91,31 @@ int main( int argc, const char* argv[] ) {
 	enum Presses { UP, RIGHT, DOWN, LEFT };
 	SDL_Rect loc = { 0, 0, 100, 100 };
 	SDL_Rect src = { 0, 0, 100, 100 };
-	Animation anim;
-	anim.init( renderer, udlrDat );
+	Animation* anim = new Animation;
+	anim->init( renderer, udlrDat );
 
-	Animation guy;
-	guy.init( renderer, guyDat);
+	Animation* guy = new Animation;
+	guy->init( renderer, guyDat);
 	SDL_Rect guyFrameRect = spriteFrame;
 	SDL_Rect guyPos = spritePos;
 	utility::Position guyPosActual = { guyPos.x, guyPos.y };
 	
 	// Test background
-	Background bg;
-	bg.init( renderer, bgDat );
+	Background* bg = new Background;
+	bg->init( renderer, bgDat );
 
 	// Test Parallax
-	Parallax hill;
-	hill.init( renderer, hillDat );
+	Parallax* hill = new Parallax;
+	hill->init( renderer, hillDat );
 	SDL_Rect pos = {0,0,640,480};
-	hill.setPosition( &pos );
-	hill.setScrollSpeed( 0.42 );
+	hill->setPosition( &pos );
+	hill->setScrollSpeed( 0.42 );
 	
-	Parallax grass;
-	grass.init( renderer, grassDat );
+	Parallax* grass = new Parallax;
+	grass->init( renderer, grassDat );
 	SDL_Rect grassPos = {0,0,640,480};
-	grass.setPosition( &grassPos );
-	grass.setScrollSpeed( 1.0 );
+	grass->setPosition( &grassPos );
+	grass->setScrollSpeed( 1.0 );
 
 	bool quit = false;
 	SDL_Event e;
@@ -217,8 +217,8 @@ int main( int argc, const char* argv[] ) {
 			break;
 		}
 
-		hill.move( vel, moveDelay );
-		grass.move( vel, moveDelay );
+		hill->move( vel, moveDelay );
+		grass->move( vel, moveDelay );
 		guyPosActual.x += moveDelay*vel.x;
 		guyPosActual.y += moveDelay*vel.y;
 		guyPos.x = utility::roundNotZero( guyPosActual.x );
@@ -230,25 +230,32 @@ int main( int argc, const char* argv[] ) {
 
 		SDL_RenderClear( renderer );
 
-		bg.draw( renderer );
-		hill.draw( renderer, 0 );
-		grass.draw( renderer, 0 );
-		//sprite.draw( renderer, &spriteFrame, &spritePos );
-		anim.draw( renderer, &loc, &src, animID, press  );
-		guy.draw( renderer, &guyPos, &guyFrameRect, guyID );
+		bg->draw( renderer );
+		hill->draw( renderer, 0 );
+		grass->draw( renderer, 0 );
+		//sprite->draw( renderer, &spriteFrame, &spritePos );
+		anim->draw( renderer, &loc, &src, animID, press  );
+		guy->draw( renderer, &guyPos, &guyFrameRect, guyID );
 		
-		window.render();
+		window->render();
 	}
 
-	sprite.~Sprite();
-	anim.~Animation();
-	guy.~Animation();
-	bg.~Background();
-	hill.~Parallax();
-	grass.~Parallax();
+	delete sprite; //sprite->~Sprite();
+	sprite = nullptr;
+	delete anim; //anim->~Animation();
+	anim = nullptr;
+	delete guy; //guy->~Animation();
+	guy = nullptr;
+	delete bg; //bg->~Background();
+	bg = nullptr;
+	delete hill; //hill->~Parallax();
+	hill = nullptr;
+	delete grass; //grass->~Parallax();
+	grass = nullptr;
 	
-	window.~Window();
-
+	delete window; //window->~Window();
+	window = nullptr;
+	
 	IMG_Quit();
 	SDL_Quit();
 
