@@ -1,5 +1,5 @@
 #include "Game.h"
-
+/*
 Game::Game() {
 }
 
@@ -50,5 +50,6 @@ bool Game::init() {
 	loadMenu();
 
 	// Initialization was successful
-	return true;
+	return true;	
 }
+*/
