@@ -37,7 +37,7 @@ int main( int argc, const char* argv[] ) {
 	
 	// Grab spritesheet
 	AnimationData udlrDat = {
-		"../testbox/udlr/udlr-sheet.png", // filename
+		"./img/udlr/udlr-sheet.png", // filename
 		{ 0, 0 }, // delays
 		{ 1, 4 }, // numframes
 		100, // frameWidth
@@ -46,7 +46,7 @@ int main( int argc, const char* argv[] ) {
 	};
 
 	AnimationData guyDat = {
-		"../testbox/img/bro.png", // filename
+		"./img/bro.png", // filename
 		{ 0, 4 }, // delays
 		{ 1, 4 }, // numframes
 		50, // frameWidth
@@ -55,7 +55,7 @@ int main( int argc, const char* argv[] ) {
 	};
 
 	AnimationData bgDat = {
-		"../testbox/img/bg.png", // filename
+		"./img/bg.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
 		640, // frameWidth
@@ -64,7 +64,7 @@ int main( int argc, const char* argv[] ) {
 	};
 
 	AnimationData hillDat = {
-		"../testbox/img/hill.png", // filename
+		"./img/hill.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
 		640, // frameWidth
@@ -73,7 +73,7 @@ int main( int argc, const char* argv[] ) {
 	};
 	
 	AnimationData grassDat = {
-		"../testbox/img/grass.png", // filename
+		"./img/grass.png", // filename
 		{ 0 }, // delays
 		{ 1 }, // numframes
 		1280, // frameWidth
