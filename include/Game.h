@@ -15,7 +15,7 @@
 #include "Window.h"
 
 class Game {
-
+/*
 private:
 	Window mainWindow;
 	SaveFile save;
@@ -24,12 +24,12 @@ private:
 	void loadLevel( std::string saveFile = "" );
 
 public:
-	Game();
-	~Game();
+	//Game();
+	//~Game();
 	
 	// initialize SDL
 	bool init();
-
+*/
 };
 
 #endif
