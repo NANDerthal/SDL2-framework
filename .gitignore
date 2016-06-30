@@ -30,3 +30,6 @@
 
 # Swap files
 *.swp
+
+# Directories
+Build/
