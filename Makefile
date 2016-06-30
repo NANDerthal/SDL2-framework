@@ -11,13 +11,11 @@ EXECUTABLE_MAIN = main.out
 EXECUTABLE_TEST = test.out
 EXECUTABLE_NAMES = $(EXECUTABLE_MAIN) $(EXECUTABLE_TEST)
 
-EXCLUDE = Game SaveFile
-EXCLUDE := $(EXCLUDE:%=src/%.cpp)
-EXCLUDE += $(EXCLUDE:src/%.cpp=include/%.h)
+#EXCLUDE = Game SaveFile
+#EXCLUDE := $(EXCLUDE:%=src/%.cpp)
+#EXCLUDE += $(EXCLUDE:src/%.cpp=include/%.h)
 
-SOURCES = $(wildcard src/*.cpp)
-SOURCES := $(filter-out $(TEST), $(SOURCES))
-SOURCES := $(filter-out $(MAIN), $(SOURCES))
+SOURCES = $(wildcard lib/*.cpp)
 SOURCES := $(filter-out $(EXCLUDE), $(SOURCES))
 
 OBJECTS = $(SOURCES:src/%.cpp=%.o)
@@ -29,7 +27,7 @@ DEBUG_FLAGS = --debug -DDEBUG
 
 # ========== UBUNTU ==========
 
-all : game test
+all : game-release test-release
 
 game-release: COMPILER_FLAGS += $(RELEASE_FLAGS)
 game-release: MAIN_OBJECTS = main.o
