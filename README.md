@@ -7,6 +7,8 @@ Dependencies:
 * SDL2 image
 * SDL2 ttf
 
-To use, clone the repo locally and see a demo program by typing `make test-release`.
+To see a demo program using the Makefile, clone the repo locally and type `make test-release`.
+
+To see a demo program using CMake, clone the repo locally and type `cmake -H. -BBuild` and then `cmake --build Build--`.
 
 Please note that this implementation is incomplete and likely will not be further developed, since much of the functionality the developers desire is more conveniently implemented with a combination of SDL2 and OpenGL rather than pure SDL2.
